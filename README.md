@@ -1,13 +1,8 @@
-# Aidoku Sources
-This repository hosts the public sources that are installable directly through the Aidoku application.
+# Nguồn Aidoku
+Thì đây là soure Aidoku tự làm =)).
 
-## Usage
-[Add this source list](https://aidoku.app/add-source-list/?url=https://raw.githubusercontent.com/Skittyblock/aidoku-community-sources/gh-pages/) to the Aidoku app.
-
-## Contributing
-Contributions are welcome!
-
-See [CONTRIBUTING.md](./.github/CONTRIBUTING.md) to get started with development.
+## Cách dùng
+[Thêm cái này vào Aidoku](https://aidoku.app/add-source-list/?url=https://raw.githubusercontent.com/KelvinHenry25/Aidoku-VN/gh-pages/)
 
 ## License
 Licensed under either of Apache License, version 2.0 or MIT license at your option.
