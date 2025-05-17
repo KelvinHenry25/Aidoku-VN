@@ -22,7 +22,7 @@ jobs:
     -
       uses: actions/checkout@v4
     - name: Set execute permission for root build.sh and all build.sh in src/rust/*
-        run: |
+      run: |
           chmod +x ./build.sh
           for f in ./src/rust/*/build.sh; do
             chmod +x "$f"
