@@ -1,15 +1,9 @@
 name: Build sources
 on:
   push:
-    branches:
-    - main
     paths:
     - 'src/**'
     - '.github/workflows/build.yaml'
-
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
 
 jobs:
   build:
@@ -20,12 +14,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     -
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
     -
       uses: google/wireit@setup-github-actions-caching/v1
+    - 
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: npm
+        cache-dependency-path: '**/package-lock.json'
     -
       name: Cache rust stuff
-      uses: actions/cache@v4
+      uses: actions/cache@v3
       with:
         path: |
          ~/.cargo/registry/index
@@ -38,7 +38,7 @@ jobs:
           ${{ runner.os }}-cargo3-
     -
       name: sccache
-      uses: actions/cache@v4
+      uses: actions/cache@v3
       with:
         path: ~/.cache/sccache
         key: ${{ runner.os }}-sccache-${{ github.sha }}
@@ -65,6 +65,17 @@ jobs:
         sudo mv -f $SCCACHE_FILE/sccache /usr/local/bin/sccache
         sudo chmod +x /usr/local/bin/sccache
     -
+      name: Build AssemblyScript sources
+      run: |
+        for src in ./src/as/*; do
+          (
+            cd "$src"
+            npm clean-install
+            npm run build
+          ) &
+        done
+        wait
+    -
       name: Build Rust sources
       run: |
         for src in ./src/rust/*; do
@@ -79,7 +90,7 @@ jobs:
         aidoku build ./**/*.aix
     -
       name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4.7.2
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
       if: ${{ github.ref == 'refs/heads/main' }}
       with:
         branch: gh-pages
@@ -90,7 +101,7 @@ jobs:
         single-commit: true
     - 
       name: Uploading packages as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       if: always()
       with:
         name: packages
@@ -98,7 +109,7 @@ jobs:
         if-no-files-found: ignore
     -
       name: Uploading gh-pages deployment as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       if: always()
       with:
         name: gh-pages
