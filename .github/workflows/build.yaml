@@ -1,3 +1,6 @@
+name: Set execute permission for build.sh
+  run: chmod +x ./build.sh
+  
 name: Build sources
 on:
   push:
