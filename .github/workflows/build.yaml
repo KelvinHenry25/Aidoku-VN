@@ -21,8 +21,7 @@ jobs:
     steps:
     -
       uses: actions/checkout@v4
-    - 
-      name: Set execute permission for root build.sh and all build.sh in src/rust/*
+    - name: Set execute permission for root build.sh and all build.sh in src/rust/*
         run: |
           chmod +x ./build.sh
           for f in ./src/rust/*/build.sh; do
