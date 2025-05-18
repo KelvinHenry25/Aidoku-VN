@@ -24,9 +24,10 @@ jobs:
     - 
       name: Set execute permission for root build.sh and all build.sh in src/rust/*
       run: |
-          for f in ./src/rust/*/build.sh; do
-            chmod +x "$f"
-          done
+        chmod +x ./build.sh || true
+        for f in ./src/rust/*/build.sh; do
+          chmod +x "$f"
+        done
     -
       uses: google/wireit@setup-github-actions-caching/v1
     -
