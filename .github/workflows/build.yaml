@@ -21,6 +21,10 @@ jobs:
     steps:
     -
       uses: actions/checkout@v4
+    - name: Debug files
+      run: |
+        echo "Current dir: $(pwd)"
+        ls -R ./src/rust
     - 
       name: Set execute permission for root build.sh and all build.sh in src/rust/*
       run: |
