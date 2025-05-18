@@ -67,7 +67,7 @@ jobs:
     -
       name: Build Rust sources
       run: |
-        for src in ./src/rust/*; do
+        for src in ./src/rust/wpcomics; do
           (
             cd "$src"
             ./build.sh -a
