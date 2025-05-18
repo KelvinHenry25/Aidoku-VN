@@ -67,15 +67,12 @@ jobs:
     -
       name: Build Rust sources
       run: |
-        for src in ./src/rust/wpcomics; do
+        for src in ./src/rust/*; do
           (
             cd "$src"
             ./build.sh -a
           )
         done
-    - name: Make build.sh executable
-      run: |
-      find ./src/rust/* -name "build.sh" -exec chmod +x {} \;
     -
       name: Building source list
       run: |
