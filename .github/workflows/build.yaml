@@ -74,6 +74,10 @@ jobs:
           )
         done
     -
+       name: Make build.sh executable
+      run: |
+        find ./src/rust -name "build.sh" -exec chmod +x {} \;
+    -
       name: Building source list
       run: |
         aidoku build ./**/*.aix
